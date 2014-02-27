@@ -6,19 +6,19 @@ try{ var base = window; }catch( error ){ base = exports; }
 		],
 		function construct( ){
 			var headNode = $( "head" );
-			headNode.append( styleNode );
+			headNode.ready( function onReady( ){
+				var absurdCompiler = function absurdCompiler( namespace, GUID ){
+					var styleNode = $( "<style></style>" );
+					styleNode.attr( "guid", GUID );
+					styleNode.attr( "namespace", namespace );
 
-			var absurdCompiler = function absurdCompiler( namespace, GUID ){
-				var styleNode = $( "<style></style>" );
-				styleNode.attr( "guid", GUID );
-				styleNode.attr( "namespace", namespace );
+					return ( function compiler( error, css ){
+						styleNode.html( css );
+						headNode.append( styleNode );
+					} );
+				};
 
-				return ( function compiler( error, css ){
-					styleNode.html( css );	
-				} );
-			};
-
-			base.absurdCompiler = absurdCompiler;
-			return absurdCompiler;
+				base.absurdCompiler = absurdCompiler;
+			} );
 		} );
 } )( base );
