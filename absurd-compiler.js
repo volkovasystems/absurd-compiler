@@ -11,13 +11,11 @@ try{ var base = window; }catch( error ){ base = exports; }
 					var styleNode = $( "<style></style>" );
 					styleNode.attr( "guid", GUID );
 					styleNode.attr( "namespace", namespace );
-
 					return ( function compiler( error, css ){
 						styleNode.html( css );
 						headNode.append( styleNode );
 					} );
 				};
-
 				base.absurdCompiler = absurdCompiler;
 			} );
 		} );
