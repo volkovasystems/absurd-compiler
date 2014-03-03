@@ -12,6 +12,9 @@ try{ var base = window; }catch( error ){ base = exports; }
 					styleNode.attr( "guid", GUID );
 					styleNode.attr( "namespace", namespace );
 					return ( function compiler( error, css ){
+						if( $( "style[namespace='" + namespace + "']" ).length != 0 ){
+							return;
+						}
 						styleNode.html( css );
 						headNode.append( styleNode );
 					} );
